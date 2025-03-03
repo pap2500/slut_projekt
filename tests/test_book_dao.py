@@ -11,4 +11,7 @@ class TestBookDAO:
         
         for book in books:
             new_book = Book(book['title'], book['description'], book['author'])
-            databas.insert_book(new_book)
+            self.databas.insert_book(new_book)
+    
+    def teardown_method(self):
+        self.databas.close()
