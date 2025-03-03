@@ -4,7 +4,7 @@ from book_dao import BookDAO
 
 class TestBookDAO:
     def setup_method(self):
-        self.databas = BookDAO('Books.db')
+        self.databas = BookDAO('books.db')
         books = [{'title': 'A', 'description': 'D', 'author': 'G'},
                  {'title': 'B', 'description': 'E', 'author': 'H'},
                  {'title': 'C', 'description': 'F', 'author': 'I'}]
@@ -14,4 +14,5 @@ class TestBookDAO:
             self.databas.insert_book(new_book)
     
     def teardown_method(self):
+        self.databas.clear_table()
         self.databas.close()
