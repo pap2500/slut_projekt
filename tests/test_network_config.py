@@ -13,5 +13,10 @@ class TestNetworkConfigManager:
         response = self.conn.show_response_prefix()
         assert response == 'response_prefix: Standard Response'
 
+    def test_update_response_prefix(self):
+        self.conn.update_response_prefix('New Response')
+        response = self.conn.show_response_prefix()
+        assert response == 'response_prefix: New Response'
+
     def teardown_method(self):
         self.conn.disconnect()
