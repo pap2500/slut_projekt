@@ -13,6 +13,7 @@ class TestNetworkConfigManager:
         old = self.conn.show_response_prefix()
         self.conn.update_response_prefix('New Response')
         new = self.conn.show_response_prefix()
+        assert new == 'New Response'
         assert not old == new
     
     def teardown_method(self):
