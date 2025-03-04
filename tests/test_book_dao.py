@@ -5,7 +5,7 @@ from book_dao import BookDAO
 class TestBookDAO:
     def setup_method(self):
         self.databas = BookDAO('books.db')
-        books = [{'title': 'Harry Potter', 'description': 'D', 'author': 'K'},
+        books = [{'title': 'Harry Potter', 'description': 'D', 'author': 'G'},
                  {'title': 'Percy Jackson', 'description': 'E', 'author': 'H'},
                  {'title': 'Eldens Hemlighet', 'description': 'F', 'author': 'I'}]
         
