@@ -9,5 +9,11 @@ class TestNetworkConfigManager:
         self.conn.update_interface_state('down')
         self.conn.update_response_prefix('Standard Response')
     
+    def test_update_response_prefix(self):
+        old = self.conn.show_response_prefix()
+        self.conn.update_response_prefix('New Response')
+        new = self.conn.show_response_prefix()
+        assert not old == new
+    
     def teardown_method(self):
         self.conn.disconnect()
