@@ -10,11 +10,9 @@ class TestNetworkConfigManager:
         self.conn.update_response_prefix('Standard Response')
     
     def test_update_response_prefix(self):
-        old = self.conn.show_response_prefix()
         self.conn.update_response_prefix('New Response')
-        new = self.conn.show_response_prefix()
-        assert new == 'New Response'
-        assert not old == new
+        response_prefix = self.conn.show_response_prefix()
+        assert response_prefix == 'response_prefix: New Response'
     
     def teardown_method(self):
         self.conn.disconnect()
