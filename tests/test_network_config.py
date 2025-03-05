@@ -2,21 +2,27 @@ import pytest
 from network_config_manager import NetworkConfigManager
 
 class TestNetworkConfigManager:
-    def setup_method(self):
-        self.conn = NetworkConfigManager()
-        self.conn.connect()
-        self.conn.update_hostname('1')
-        self.conn.update_interface_state('down')
-        self.conn.update_response_prefix('Standard Response')
+    @pytest.fixture
+    def connection_method(self):
+        conn = NetworkConfigManager()
+        conn.connect()
+        conn.update_hostname('1')
+        conn.update_interface_state('down')
+        conn.update_response_prefix('Standard Response')
     
-    def test_show_response_prefix(self):
-        response = self.conn.show_response_prefix()
+        yield conn
+        conn.disconnect()
+    
+    def test_update_host_name(self, connection_method):
+        connection_method.update_hostname('2')
+        host_name = connection_method.show_hostname()
+        assert host_name == 'hostname: 2'
+
+    def test_show_response_prefix(self, connection_method):
+        response = connection_method.show_response_prefix()
         assert response == 'response_prefix: Standard Response'
 
-    def test_update_response_prefix(self):
-        self.conn.update_response_prefix('New Response')
-        response = self.conn.show_response_prefix()
+    def test_update_response_prefix(self, connection_method):
+        connection_method.update_response_prefix('New Response')
+        response = connection_method.show_response_prefix()
         assert response == 'response_prefix: New Response'
-
-    def teardown_method(self):
-        self.conn.disconnect()
