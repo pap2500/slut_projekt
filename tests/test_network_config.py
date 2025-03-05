@@ -22,23 +22,4 @@ class TestNetworkCongigManager:
         self.conn.update_hostname('2')
         host_name = self.conn.show_hostname()
         assert host_name == 'hostname: 2'
-
-
-#show_hostname = ConnectHandler (**server)
-#command = "cat /etc/config/hostname/config.txt"
-#output = show_hostname.send_command (command)
-#print (output)
-
-
-#update_hostname = ConnectHandler (**server)
-#command = f"bash -c \"echo 'hostname: {3}' > /etc/config/hostname/config.txt\""
-#output = update_hostname.send_command (command)
-#print (output)
-
-
-
-#net_connect = ConnectHandler(**server)
-#print("Conneted to server")
-#command = "cat /etc/config/hostname/config.txt"
-#output = net_connect.send_command(command)
-#print (output)
+    
