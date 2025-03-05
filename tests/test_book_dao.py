@@ -18,7 +18,8 @@ class TestBookDAO:
     def test_get_all_books (self): 
         books = self.databas.get_all_books ()
         assert 3 == len (books)  #För att verifiera att det är 3 böcker 
-
+        
+#Metod som lägger till en bok och veriferar att det är 4 böcker nu
     def test_insert_book (self):
         new_book = Book ('The Hunger Games', 'J', 'Suzanne Collins') 
         self.databas.insert_book (new_book)
