@@ -9,9 +9,10 @@ class TestNetworkConfigManager:
         conn.update_hostname('1')
         conn.update_interface_state('down')
         conn.update_response_prefix('Standard Response')
-    
+   
         yield conn
         conn.disconnect()
+    
     
     def test_update_host_name(self, connection_method):
         connection_method.update_hostname('2')
@@ -26,3 +27,8 @@ class TestNetworkConfigManager:
         connection_method.update_response_prefix('New Response')
         response = connection_method.show_response_prefix()
         assert response == 'response_prefix: New Response'
+        
+        
+    def test_update_interface_state_error(self):
+        with pytest.raises(ValueError):
+            self.conn.update_interface_state('upp')
