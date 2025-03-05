@@ -14,5 +14,9 @@ class TestNetworkConfigManager:
         response_prefix = self.conn.show_response_prefix()
         assert response_prefix == 'response_prefix: New Response'
     
+    def test_update_interface_state_error(self):
+        with pytest.raises(ValueError):
+            self.conn.update_interface_state('upp')
+    
     def teardown_method(self):
         self.conn.disconnect()
