@@ -19,9 +19,11 @@ class TestNetworkConfigManager:
         host_name = connection_method.show_hostname()
         assert host_name == 'hostname: 2'
 
+
     def test_show_response_prefix(self, connection_method):
         response = connection_method.show_response_prefix()
         assert response == 'response_prefix: Standard Response'
+
 
     def test_update_response_prefix(self, connection_method):
         connection_method.update_response_prefix('New Response')
@@ -29,6 +31,6 @@ class TestNetworkConfigManager:
         assert response == 'response_prefix: New Response'
         
         
-    def test_update_interface_state_error(self):
+    def test_update_interface_state_error(self, connection_method):
         with pytest.raises(ValueError):
-            self.conn.update_interface_state('upp')
+            connection_method.update_interface_state('upp')
