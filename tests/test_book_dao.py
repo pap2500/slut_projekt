@@ -18,13 +18,6 @@ class TestBookDAO:
         databas.clear_table()
         databas.close()
     
-    
-    def test_delete_book(self):
-        the_book = self.databas.find_by_title('Eldens Hemlighet')
-        self.databas.delete_book(the_book)
-        the_book = self.databas.find_by_title('Eldens Hemlighet')
-        assert the_book == None
-    
 
     def test_update_book(self, create_database):
         book = create_database.find_by_title('Percy Jackson')
@@ -32,3 +25,10 @@ class TestBookDAO:
         create_database.update_book(book)
         book = create_database.find_by_title('Percy Jackson')
         assert book.description == 'Ny beskrivning för Percy Jackson'
+    
+    
+    def test_delete_book(self, create_database):
+        the_book = create_database.find_by_title('Eldens Hemlighet')
+        create_database.delete_book(the_book)
+        the_book = create_database.find_by_title('Eldens Hemlighet')
+        assert the_book == None
