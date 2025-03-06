@@ -15,7 +15,7 @@ class TestBookDAO:
             databas.insert_book(new_book)
 
         yield databas
-        databas.clear_table()
+        databas.clear_table()   
         databas.close()
     
     def test_update_book(self, create_database):
