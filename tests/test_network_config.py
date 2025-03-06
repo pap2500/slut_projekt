@@ -3,15 +3,21 @@ from network_config_manager import NetworkConfigManager
 
 class TestNetworkConfigManager:
     @pytest.fixture
-    def connection_method(self):
+    def connection(self):
         conn = NetworkConfigManager()
         conn.connect()
-        conn.update_hostname('1')
-        conn.update_interface_state('down')
-        conn.update_response_prefix('Standard Response')
    
         yield conn
         conn.disconnect()
+    
+    
+    @pytest.fixture
+    def connection_method(self, connection):
+        connection.update_hostname('1')
+        connection.update_interface_state('down')
+        connection.update_response_prefix('Standard Response')
+   
+        return connection
     
     
     def test_update_host_name(self, connection_method):
@@ -31,6 +37,6 @@ class TestNetworkConfigManager:
         assert response == 'response_prefix: New Response'
         
         
-    def test_update_interface_state_error(self, connection_method):
+    def test_update_interface_state_error(self, connection):
         with pytest.raises(ValueError):
-            connection_method.update_interface_state('upp')
+            connection.update_interface_state('upp')
