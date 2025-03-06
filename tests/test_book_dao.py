@@ -24,15 +24,15 @@ class TestBookDAO:
         
 #Metod som kollar att det finns tre böcker
 
-    def test_get_all_books (self, create_databas): 
-        books = create_databas.get_all_books ()
+    def test_get_all_books (self, create_database): 
+        books = create_database.get_all_books ()
         assert 3 == len (books)  #För att verifiera att det är 3 böcker 
         
 #Metod som lägger till en bok och veriferar att det är 4 böcker nu
-    def test_insert_book (self, create_databas):
+    def test_insert_book (self, create_database):
         new_book = Book ('The Hunger Games', 'J', 'Suzanne Collins') 
-        create_databas.insert_book (new_book)
-        books = create_databas.get_all_books()
+        create_database.insert_book (new_book)
+        books = create_database.get_all_books()
         assert 4 == len (books)    
 
     def test_update_book(self, create_database):

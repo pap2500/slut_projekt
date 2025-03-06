@@ -16,17 +16,17 @@ class TestNetworkConfigManager:
       
        #Metod som kollar att hostname är rätt
 
-    def test_show_hostname (self, connect_method):
-        connect_method.show_hostname ()
-        host_name = connect_method.show_hostname ()
+    def test_show_hostname (self, connection_method):
+        connection_method.show_hostname ()
+        host_name = connection_method.show_hostname ()
         assert host_name == 'hostname: 1'
 
 
     #Metod som updaterar hostname
 
-    def test_update_hostname (self, connect_method):
-        connect_method.update_hostname ('2')
-        host_name = connect_method.show_hostname ()
+    def test_update_hostname (self, connection_method):
+        connection_method.update_hostname ('2')
+        host_name = connection_method.show_hostname ()
         assert host_name == 'hostname: 2'
     
     
