@@ -32,3 +32,10 @@ class TestBookDAO:
         create_database.delete_book(the_book)
         the_book = create_database.find_by_title('Eldens Hemlighet')
         assert the_book == None
+        
+    def test_find_by_title(self, create_database):
+         #metod som hämtar en book via titel och veriferar att dess beskrivning stämmer med förväntat värde
+        book = create_database.find_by_title('Harry Potter')
+        assert book.description == ('D')
+
+
