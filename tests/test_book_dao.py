@@ -2,37 +2,40 @@ import pytest
 from book import Book
 from book_dao import BookDAO
 
-class TestBookDao:
+class TestBookDAO:
     @pytest.fixture
     def create_database(self):
-        database = BookDAO("Books.db") 
-        
-        
+        databas = BookDAO('books.db')
         books = [{'title': 'Harry Potter', 'description': 'D', 'author': 'G'},
-                 {'title': 'Percy jackson', 'description': 'E', 'author': 'H'},
-                 {'title': 'Eldens Hemlighet', 'description': 'F', 'author': 'I'}]
-        
+                {'title': 'Percy Jackson', 'description': 'E', 'author': 'H'},
+                {'title': 'Eldens Hemlighet', 'description': 'F', 'author': 'I'}]
         
         for book in books:
             new_book = Book(book['title'], book['description'], book['author'])
-            database.insert_book(new_book)
-        
-        
-   
+            databas.insert_book(new_book)
+
+        yield databas
+        databas.clear_table()
+        databas.close()
     
-        yield database
-        database.clear_table()
-        database.close()
-            
-            
+
+    def test_update_book(self, create_database):
+        book = create_database.find_by_title('Percy Jackson')
+        book.description = 'Ny beskrivning för Percy Jackson'
+        create_database.update_book(book)
+        book = create_database.find_by_title('Percy Jackson')
+        assert book.description == 'Ny beskrivning för Percy Jackson'
+    
+    
+    def test_delete_book(self, create_database):
+        the_book = create_database.find_by_title('Eldens Hemlighet')
+        create_database.delete_book(the_book)
+        the_book = create_database.find_by_title('Eldens Hemlighet')
+        assert the_book == None
+        
     def test_find_by_title(self, create_database):
          #metod som hämtar en book via titel och veriferar att dess beskrivning stämmer med förväntat värde
         book = create_database.find_by_title('Harry Potter')
         assert book.description == ('D')
-        
-            
-    
-    
-    
-          
-    
+
+
