@@ -28,12 +28,6 @@ class TestNetworkConfigManager:
         connection_method.update_hostname ('2')
         host_name = connection_method.show_hostname ()
         assert host_name == 'hostname: 2'
-    
-    
-    def test_update_host_name(self, connection_method):
-        connection_method.update_hostname('2')
-        host_name = connection_method.show_hostname()
-        assert host_name == 'hostname: 2'
 
     def test_show_interface_state(self, connection_method):
             # en simpel funktion som returerar om värdet på interface_state är down
